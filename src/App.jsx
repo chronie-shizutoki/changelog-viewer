@@ -57,7 +57,7 @@ function App() {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetch(`/changelogs/${language}.json`)
+        const response = await fetch(`changelogs/${language}.json`)
         if (!response.ok) {
           throw new Error('Failed to fetch changelogs')
         }
