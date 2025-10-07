@@ -1,0 +1,62 @@
+[
+  {
+    "version": "0.3.0",
+    "date": "2025-10-04",
+    "content": "## Major Updates\n\n- Added Game ID and SNS account display functionality\n- Refactored Chinese versions: Merged Malaysia and Singapore versions for unified management\n- Added AI-powered multilingual translation support for Mainland China version"
+  },
+  {
+    "version": "0.2.5",
+    "date": "2025-09-21",
+    "content": "## Feature Improvements\n\n- Added ruby character (Zhuyin) support for Traditional Chinese Taiwan version\n- Added user feedback interface across all versions"
+  },
+  {
+    "version": "0.2.4",
+    "date": "2025-09-20",
+    "content": "## Feature Enhancements\n\n- Added ruby character (Furigana) support for Japanese version\n- Added background image author attribution across all versions"
+  },
+  {
+    "version": "0.2.3",
+    "date": "2025-09-17",
+    "content": "## Visual Upgrade\n\n- Refactored interface style to Liquid Glass design"
+  },
+  {
+    "version": "0.2.2",
+    "date": "2025-09-09",
+    "content": "## Text Optimization\n\n- Unified terminology from \"Huayu\" to \"Huawen\" across all Chinese variants"
+  },
+  {
+    "version": "0.2.1",
+    "date": "2025-09-06",
+    "content": "## Feature Expansion\n\n- Added new language selection menu\n- Added support for Simplified Chinese (Mainland China region)\n- Added single-file distribution support"
+  },
+  {
+    "version": "0.2.0",
+    "date": "2025-08-31",
+    "content": "## Multilingual Support\n\n- Added multilingual support: English, Chinese (Malaysia), Chinese (Singapore), Traditional Chinese (Taiwan)"
+  },
+  {
+    "version": "0.1.4",
+    "date": "2025-08-18",
+    "content": "## New Features\n\n- Added birthday reminder functionality"
+  },
+  {
+    "version": "0.1.3",
+    "date": "2025-08-17",
+    "content": "## Architecture Refactoring\n\n- Refactored project structure using modular design"
+  },
+  {
+    "version": "0.1.2",
+    "date": "2025-08-16",
+    "content": "## Experience Optimization\n\n- Optimized first-screen content display\n- Improved page loading speed\n- Enhanced responsive layout adaptation\n- Improved privacy policy page display"
+  },
+  {
+    "version": "0.1.1",
+    "date": "2025-08-15",
+    "content": "## Feature Updates\n\n- Integrated Google Analytics 4 for basic data collection\n- Upgraded interface style to glass morphism effect"
+  },
+  {
+    "version": "0.1.0",
+    "date": "2025-08-14",
+    "content": "## Initial Release\n\n- Initial version launched with Japanese interface support"
+  }
+]
