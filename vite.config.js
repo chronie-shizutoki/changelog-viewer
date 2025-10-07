@@ -18,19 +18,27 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // 指定入口文件
   build: {
     // 确保输出目录为dist
     outDir: 'dist',
     // 确保静态资源文件路径正确
     assetsDir: 'assets',
-    // 禁用CSS代码拆分，确保样式正确加载
-    cssCodeSplit: false,
+    // 保持CSS代码拆分，让Vite默认处理
+    cssCodeSplit: true,
     // 确保生成的HTML文件正确引用资源
     rollupOptions: {
+      // 明确指定入口文件
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+      },
       output: {
+        // 使用相对路径确保资源正确加载
         assetFileNames: 'assets/[name]-[hash].[ext]',
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
+        // 确保使用相对路径
+        manualChunks: undefined,
       },
     },
   },
