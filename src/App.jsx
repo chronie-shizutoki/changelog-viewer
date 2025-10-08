@@ -7,8 +7,8 @@ import './App.css'
 // Language configurations
 const languages = {
   en: { name: 'English' },
-  zh: { name: '中文' },
-  ja: { name: '日本語' }
+  ja: { name: '日本語' },
+  zh: { name: '中文' }
 }
 
 const uiTexts = {
@@ -21,15 +21,6 @@ const uiTexts = {
     darkMode: 'Toggle dark mode',
     language: 'Change language'
   },
-  zh: {
-    title: '更新日志',
-    subtitle: '追踪所有更新和改进',
-    loading: '加载日志中...',
-    error: '加载日志失败',
-    version: '版本',
-    darkMode: '切换深色模式',
-    language: '切换语言'
-  },
   ja: {
     title: '更新履歴',
     subtitle: 'すべての更新と改善を追跡',
@@ -38,12 +29,44 @@ const uiTexts = {
     version: 'バージョン',
     darkMode: 'ダークモード切替',
     language: '言語を変更'
-  }
+  },
+    zh: {
+    title: '更新日志',
+    subtitle: '追踪所有更新和改进',
+    loading: '加载日志中...',
+    error: '加载日志失败',
+    version: '版本',
+    darkMode: '切换深色模式',
+    language: '切换语言'
+  },
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
-  const [language, setLanguage] = useState('en')
+  // Initialize dark mode: Check session storage and browser preferences
+  const getInitialDarkMode = () => {
+    // First check if there is a user preference in session storage
+    const storedDarkMode = sessionStorage.getItem('darkMode');
+    if (storedDarkMode !== null) {
+      return storedDarkMode === 'true';
+    }
+    // Otherwise check browser preference
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
+
+  // Initialize language: Check browser language settings
+  const getInitialLanguage = () => {
+    // Get browser preferred language
+    const browserLang = navigator.language.split('-')[0]; // Get main language code (e.g. 'en-US' -> 'en')
+    // Check if the language is supported
+    if (Object.keys(languages).includes(browserLang)) {
+      return browserLang;
+    }
+    // If not supported, use default language
+    return 'en';
+  };
+
+  const [darkMode, setDarkMode] = useState(getInitialDarkMode)
+  const [language, setLanguage] = useState(getInitialLanguage)
   const [changelogs, setChangelogs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -73,13 +96,15 @@ function App() {
     loadChangelogs()
   }, [language])
 
-  // Toggle dark mode
+  // Toggle dark mode and save to session storage
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
+    // 保存深色模式偏好到会话存储
+    sessionStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode])
 
   // Cycle through languages
@@ -206,7 +231,7 @@ function App() {
         {/* Footer */}
         <footer className="glass border-t border-white/10 mt-12">
           <div className="container mx-auto px-4 py-6 text-center text-foreground/60 text-sm">
-            <p>Glassmorphism Changelog Viewer • Built with React</p>
+            <p>Changelog Viewer • 2025</p>
           </div>
         </footer>
       </div>
