@@ -2,17 +2,17 @@
   {
   "version": "0.3.1",
   "date": "2025-10-09",
-  "content": "## Feature Improvements\n\n- Added update log display for all versions\n- Refactored ruby character switch interface for Japanese and Traditional Chinese Taiwan versions"
+  "content": "## Feature Improvements\n\n- Added update log display for all versions\n- Refactored ruby character switch interface for Japanese and Traditional Chinese Taiwan versions\n- Refactored language selection interface style"
   },
   {
     "version": "0.3.0",
     "date": "2025-10-04",
-    "content": "## Major Updates\n\n- Added Game ID and SNS account display functionality\n- Refactored Chinese versions: Merged Malaysia and Singapore versions for unified management\n- Added AI-powered multilingual translation support for Mainland China version"
+    "content": "## Major Updates\n\n- Added Game ID and SNS account display functionality\n- Refactored Chinese versions: Merged Malaysia and Singapore versions for unified management\n- Refactored language selection interface style"
   },
   {
     "version": "0.2.5",
     "date": "2025-09-21",
-    "content": "## Feature Improvements\n\n- Added ruby character (Zhuyin) support for Traditional Chinese Taiwan version\n- Added user feedback interface across all versions"
+    "content": "## Feature Improvements\n\n- Added ruby character support for Traditional Chinese Taiwan version\n- Added user feedback interface across all versions\n- Introduced language selection page"
   },
   {
     "version": "0.2.4",
