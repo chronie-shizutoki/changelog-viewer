@@ -32,7 +32,7 @@
   {
     "version": "0.2.1",
     "date": "2025-09-06",
-    "content": "## Feature Expansion\n\n- Added new language selection menu\n- Added support for Simplified Chinese (Mainland China region)\n- Added single-file distribution support"
+    "content": "## Feature Expansion\n\n- Added new language selection menu"
   },
   {
     "version": "0.2.0",
