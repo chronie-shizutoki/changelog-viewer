@@ -1,5 +1,10 @@
 [
   {
+  "version": "0.3.1",
+  "date": "2025-10-09",
+  "content": "## Feature Improvements\n\n- Added update log display for all versions"
+  },
+  {
     "version": "0.3.0",
     "date": "2025-10-04",
     "content": "## Major Updates\n\n- Added Game ID and SNS account display functionality\n- Refactored Chinese versions: Merged Malaysia and Singapore versions for unified management\n- Added AI-powered multilingual translation support for Mainland China version"
