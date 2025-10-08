@@ -8,37 +8,47 @@ import './App.css'
 const languages = {
   en: { name: 'English' },
   ja: { name: '日本語' },
-  zh: { name: '中文' }
+  zh: { name: '简体中文' },
+  tw: { name: '繁體中文' }
 }
 
 const uiTexts = {
   en: {
-    title: 'Changelog',
-    subtitle: 'Track all updates and improvements',
-    loading: 'Loading changelogs...',
-    error: 'Failed to load changelogs',
+    title: 'Release Notes',
+    subtitle: 'Stay informed about every update and enhancement',
+    loading: 'Loading updates...',
+    error: 'Unable to load release notes',
     version: 'Version',
     darkMode: 'Toggle dark mode',
-    language: 'Change language'
+    language: 'Switch language'
   },
   ja: {
     title: '更新履歴',
-    subtitle: 'すべての更新と改善を追跡',
-    loading: '履歴を読み込み中...',
-    error: '履歴の読み込みに失敗しました',
+    subtitle: 'アップデートと改善点の全記録',
+    loading: '読み込み中...',
+    error: '更新履歴の読み込みに失敗しました',
     version: 'バージョン',
-    darkMode: 'ダークモード切替',
-    language: '言語を変更'
+    darkMode: 'ダークモードを切り替え',
+    language: '言語を切り替え'
   },
-    zh: {
+  zh: {
     title: '更新日志',
-    subtitle: '追踪所有更新和改进',
-    loading: '加载日志中...',
-    error: '加载日志失败',
+    subtitle: '记录每一次更新与优化',
+    loading: '正在加载更新内容...',
+    error: '加载更新信息失败',
     version: '版本',
-    darkMode: '切换深色模式',
+    darkMode: '深色模式切换',
     language: '切换语言'
   },
+  tw: {
+    title: '更新日誌',
+    subtitle: '記錄每一次更新與優化',
+    loading: '正在載入更新內容...',
+    error: '載入更新資訊失敗',
+    version: '版本',
+    darkMode: '深色模式切換',
+    language: '切換語言'
+  }
 }
 
 function App() {
@@ -103,7 +113,7 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark')
     }
-    // 保存深色模式偏好到会话存储
+    // Save dark mode preference to session storage
     sessionStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode])
 
@@ -141,7 +151,7 @@ function App() {
                 </Button>
                 
                 {showLangMenu && (
-                  <div className="absolute right-0 mt-2 glass rounded-lg overflow-hidden shadow-lg">
+                  <div className="absolute right-0 mt-2 glass rounded-lg overflow-hidden shadow-lg w-28">
                     {Object.entries(languages).map(([key, lang]) => (
                       <button
                         key={key}
@@ -153,7 +163,6 @@ function App() {
                           language === key ? 'bg-white/10' : ''
                         }`}
                       >
-                        <span className="mr-2">{lang.flag}</span>
                         {lang.name}
                       </button>
                     ))}
