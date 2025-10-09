@@ -1,5 +1,10 @@
 [
   {
+    "version": "0.3.2",
+    "date": "2025-10-09",
+    "content": "## Fixes\n\n- Fixed an issue where an excessively high backdrop-filter blur value caused severe performance degradation and an overly blurred display."
+  },
+  {
   "version": "0.3.1",
   "date": "2025-10-09",
   "content": "## Feature Improvements\n\n- Added update log display for all versions\n- Refactored ruby character switch interface for Japanese and Traditional Chinese Taiwan versions\n- Refactored language selection interface style"
