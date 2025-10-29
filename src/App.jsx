@@ -13,41 +13,41 @@ const languages = {
 }
 
 const uiTexts = {
-  en: {
-    title: 'Release Notes',
-    subtitle: 'Stay informed about every update and enhancement',
-    loading: 'Loading updates...',
-    error: 'Unable to load release notes',
-    version: 'Version',
-    darkMode: 'Toggle dark mode',
-    language: 'Switch language'
+  "en": {
+    "title": 'New Stuff! 🎉',
+    "subtitle": 'See all the cool things we added for u!',
+    "loading": 'Loading happi updates... 🐾',
+    "error": 'Oops! Cant load the news 😿',
+    "version": 'Versin',
+    "darkMode": 'Dark mode go nyoom 🌙',
+    "language": 'Speak my language! 🌍'
   },
-  ja: {
-    title: '更新履歴',
-    subtitle: 'アップデートと改善点の全記録',
-    loading: '読み込み中...',
-    error: '更新履歴の読み込みに失敗しました',
-    version: 'バージョン',
-    darkMode: 'ダークモードを切り替え',
-    language: '言語を切り替え'
+  "ja": {
+    "title": 'お知らせにゃん！🎉',
+    "subtitle": '新しい機能と改善点をご紹介しますにゃ',
+    "loading": '更新をチェック中... 🐾',
+    "error": 'お知らせの読み込みに失敗しました 😿',
+    "version": 'バージョン',
+    "darkMode": 'ダークモードで遊ぼう 🌙',
+    "language": '言葉を変える 🌍'
   },
-  zh: {
-    title: '更新日志',
-    subtitle: '记录每一次更新与优化',
-    loading: '正在加载更新内容...',
-    error: '加载更新信息失败',
-    version: '版本',
-    darkMode: '深色模式切换',
-    language: '切换语言'
+  "zh": {
+    "title": '新鲜事速递！🎉',
+    "subtitle": '来看看我们又准备了什么小惊喜~',
+    "loading": '正在检查新礼物... 🐾',
+    "error": '哎呀，消息迷路了 😿',
+    "version": '版本',
+    "darkMode": '夜间模式开关 🌙', 
+    "language": '切换语言 🌍'
   },
-  tw: {
-    title: '更新日誌',
-    subtitle: '記錄每一次更新與優化',
-    loading: '正在載入更新內容...',
-    error: '載入更新資訊失敗',
-    version: '版本',
-    darkMode: '深色模式切換',
-    language: '切換語言'
+  "tw": {
+    "title": '新鮮事速遞！🎉',
+    "subtitle": '來看看我們又準備了什麼小驚喜~',
+    "loading": '正在檢查新禮物... 🐾',
+    "error": '哎呀，訊息迷路了 😿',
+    "version": '版本',
+    "darkMode": '夜間模式開關 🌙',
+    "language": '切換語言 🌍'
   }
 }
 
@@ -116,15 +116,6 @@ function App() {
     // Save dark mode preference to session storage
     sessionStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode])
-
-  // Cycle through languages
-  const cycleLanguage = () => {
-    const langKeys = Object.keys(languages)
-    const currentIndex = langKeys.indexOf(language)
-    const nextIndex = (currentIndex + 1) % langKeys.length
-    setLanguage(langKeys[nextIndex])
-    setShowLangMenu(false)
-  }
 
   return (
     <div className="min-h-screen gradient-bg">
