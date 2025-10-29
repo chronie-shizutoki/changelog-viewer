@@ -143,6 +143,34 @@ function App() {
     sessionStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode])
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if dropdown is open
+      if (showLangMenu || dropdownState === 'closing') {
+        const langButton = event.target.closest('button[title="' + text.language + '"]');
+        const langDropdown = event.target.closest('.lang-dropdown-transition');
+        
+        // If click is outside both the button and the dropdown
+        if (!langButton && !langDropdown) {
+          setDropdownState('closing');
+          setTimeout(() => {
+            setShowLangMenu(false);
+            setDropdownState('closed');
+          }, 400);
+        }
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    // Cleanup event listener on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLangMenu, dropdownState, text.language])
+
   return (
     <div className="min-h-screen gradient-bg">
       <div className="min-h-screen backdrop-blur-sm">

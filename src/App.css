@@ -224,31 +224,31 @@
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-/* Keyframes for dropdown open animation with bounce */
+/* Keyframes for dropdown open animation with bounce from top-right */
 @keyframes dropdownOpen {
   0% {
     opacity: 0;
-    transform: scale(0.8) translateY(-5px);
+    transform: scale(0.8) translate(10px, -10px);
   }
   70% {
     opacity: 1;
-    transform: scale(1.05) translateY(0);
+    transform: scale(1.05) translate(0, 0);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1) translate(0, 0);
   }
 }
 
-/* Keyframes for dropdown close animation */
+/* Keyframes for dropdown close animation back to top-right */
 @keyframes dropdownClose {
   0% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1) translate(0, 0);
   }
   100% {
     opacity: 0;
-    transform: scale(0.8) translateY(-5px);
+    transform: scale(0.8) translate(10px, -10px);
   }
 }
 
