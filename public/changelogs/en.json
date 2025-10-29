@@ -1,72 +1,77 @@
 [
   {
-    "version": "0.3.2",
-    "date": "2025-10-09",
-    "content": "## Fixes\n\n- Fixed an issue where an excessively high backdrop-filter blur value caused severe performance degradation and an overly blurred display."
+    "version": "0.3.3",
+    "date": "2025-10-30",
+    "content": "## 5f anniversarry iz ovar... (´･ω･`)\n\n- did a sneeki change to da Genshin 5 yeer party icon, bak to regulur now ~ o( =∩ω∩= )m"
   },
   {
-  "version": "0.3.1",
-  "date": "2025-10-09",
-  "content": "## Feature Improvements\n\n- Added update log display for all versions\n- Refactored ruby character switch interface for Japanese and Traditional Chinese Taiwan versions\n- Refactored language selection interface style"
+    "version": "0.3.2",
+    "date": "2025-10-09",
+    "content": "## Laggy blurs, BEGONE! (ง •̀_•́)ง\n\n- fuzzy bakground no maeks u laggy an see blury stuffs nao ~ (ノ◕ヮ◕)ノ*:･ﾟ✧"
+  },
+  {
+    "version": "0.3.1",
+    "date": "2025-10-09",
+    "content": "## Wat doin, Mewmew Candy? (◕ᴗ◕✿)\n\n- gibbed all versins \"Chaynjlog\" badge! Com see owr grow diary! (ﾉ>ω<)ﾉ\n- remaded da \"Furigana Switch\" room for Nihongo an Taiwan frens, so cozy nao! (｡•ᴗ•｡)♡\n- langwedge choozy screen got new fashun too! ♪(^∇^*)"
   },
   {
     "version": "0.3.0",
     "date": "2025-10-04",
-    "content": "## Major Updates\n\n- Added Game ID and SNS account display functionality\n- Refactored Chinese versions: Merged Malaysia and Singapore versions for unified management\n- Refactored language selection interface style"
+    "content": "## Wher iz Mewmew Candy 2dae? (･ω<)☆\n\n- game ID an social media acounts can sho nao! Wher Mewmew Candy be? ٩(◕‿◕｡)۶\n- Chinese versins big happy fambly! Malaysia an Singapore versins togever nao! (★ω★)/\n- langwedge choozy screen so shiny new! (≧∇≦)ﾉ"
   },
   {
     "version": "0.2.5",
-    "date": "2025-09-21",
-    "content": "## Feature Improvements\n\n- Added ruby character support for Traditional Chinese Taiwan version\n- Added user feedback interface across all versions\n- Introduced language selection page"
+    "date": "2025-09-25",
+    "content": "## Wan hear ur voice (⁄ ⁄•⁄ω⁄•⁄ ⁄)\n\n- Taiwan Chinese versin can has furigana magics too! Go see! (๑•̀ㅂ•́)و✧\n- all versins has \"hooman feedback\" mailbox nao, we lissens! (.❛ ᴗ ❛.)\n- new smort langwedge chooser page! Mewmew gesses... dis ur mother lang? (・∀・)?"
   },
   {
     "version": "0.2.4",
     "date": "2025-09-20",
-    "content": "## Feature Enhancements\n\n- Added ruby character (Furigana) support for Japanese version\n- Added background image author attribution across all versions"
+    "content": "## Doin da Furigana Magics (ノ°ο°)ノ\n\n- Nihongo versin can has furigana nao! Go use! ~(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n- put smol credit for bakground pikchur artiss in all cornurs, thank u teachur! m(_ _)m"
   },
   {
     "version": "0.2.3",
     "date": "2025-09-17",
-    "content": "## Visual Upgrade\n\n- Refactored interface style to Liquid Glass design"
+    "content": "## Liquid Glass! So fancy! (☆▽☆)\n\n- whole face wearin new liquid glass dress ~ ✨ヽ(●´∀`●)ﾉ✨"
   },
   {
     "version": "0.2.2",
     "date": "2025-09-09",
-    "content": "## Text Optimization\n\n- Unified terminology from \"Huayu\" to \"Huawen\" across all Chinese variants"
+    "content": "## Huayu or Huawen? (・∀・)\n\n- changed all \"Huayu\" to more bettur \"Chinese\" ~ (￣ω￣)/"
   },
   {
     "version": "0.2.1",
     "date": "2025-09-06",
-    "content": "## Feature Expansion\n\n- Added new language selection menu"
+    "content": "## New Skill Get!! ٩(◕‿◕)۶\n\n- added langwedge picky menu ~ talk to Mewmew Candy in ur birth lang! ヽ(✿ﾟ▽ﾟ)ノ"
   },
   {
     "version": "0.2.0",
     "date": "2025-08-31",
-    "content": "## Multilingual Support\n\n- Added multilingual support: English, Chinese (Malaysia), Chinese (Singapore), Traditional Chinese (Taiwan)"
+    "content": "## Across many werlds, we finally meets (●ˊωˋ●)ゞ\n\n- can speaks many langs nao! English, Chinese (Malaysia), Chinese (Singapore), Traditional Chinese (Taiwan) all OK! ~ ♪(´▽｀)"
   },
   {
     "version": "0.1.4",
     "date": "2025-08-18",
-    "content": "## New Features\n\n- Added birthday reminder functionality"
+    "content": "## 'Member Mewmew Candy's birfday? (✿◠‿◠)\n\n- has birfday remindurs nao! Com wish happi birfday on social media! ヽ(●´∀`●)ﾉ🎂"
   },
   {
     "version": "0.1.3",
     "date": "2025-08-17",
-    "content": "## Architecture Refactoring\n\n- Refactored project structure using modular design"
+    "content": "## Insyd big glow up (￣︶￣)↗\n\n- used blocky cod bricks to rebild evryfing"
   },
   {
     "version": "0.1.2",
     "date": "2025-08-16",
-    "content": "## Experience Optimization\n\n- Optimized first-screen content display\n- Improved page loading speed\n- Enhanced responsive layout adaptation\n- Improved privacy policy page display"
+    "content": "## Day we meted u (｡♡‿♡｡)\n\n- How wuz ur furst time seein dis werld? Mewmew Candy tryin hard to maeks nice furst home for u ~ (๑•́ ₃ •̀๑)✧\n- pages load fast like ZOOM! ⚡(ﾉ>ω<)ﾉ\n- How u fit in dis new werld? Anywher u from, smol werld always open for u! (fits all hooman rectangles nao) (づ｡◕‿‿◕｡)づ\n- privacy rules page more clearer nao! (•̀ᴗ•́)و"
   },
   {
     "version": "0.1.1",
     "date": "2025-08-15",
-    "content": "## Feature Updates\n\n- Integrated Google Analytics 4 for basic data collection\n- Upgraded interface style to glass morphism effect"
+    "content": "## Grownd extra stronk nao (๑•̀ㅂ•́)و✧\n\n- invited Google Analytics 4 butler to help build dream werld! (￣ω￣)/\n- changed to dreamy \"Glass Morphism\" new skin! ✨ヽ(●´∀`●)ﾉ✨"
   },
   {
     "version": "0.1.0",
     "date": "2025-08-14",
-    "content": "## Initial Release\n\n- Initial version launched with Japanese interface support"
+    "content": "## Furst Meet (◕‿◕✿)\n\n- furst versin out nao, can speak Nihongo! ヽ(>∀<☆)ノ"
   }
 ]
