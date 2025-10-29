@@ -81,8 +81,34 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [dropdownState, setDropdownState] = useState('closed') // 'open', 'closing', 'closed'
 
   const text = uiTexts[language]
+
+  // Handle dropdown animation states
+  const handleMenuToggle = () => {
+    if (dropdownState === 'open' || dropdownState === 'closing') {
+      setDropdownState('closing')
+      // Wait for close animation to complete before hiding
+      setTimeout(() => {
+        setShowLangMenu(false)
+        setDropdownState('closed')
+      }, 400)
+    } else {
+      setShowLangMenu(true)
+      setDropdownState('open')
+    }
+  }
+
+  // Handle language selection
+  const handleLanguageSelect = (key) => {
+    setLanguage(key)
+    setDropdownState('closing')
+    setTimeout(() => {
+      setShowLangMenu(false)
+      setDropdownState('closed')
+    }, 400)
+  }
 
   // Load changelogs from JSON file
   useEffect(() => {
@@ -134,23 +160,22 @@ function App() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => setShowLangMenu(!showLangMenu)}
+                  onClick={handleMenuToggle}
                   className="glass hover:bg-white/20"
                   title={text.language}
                 >
                   <Globe className="h-5 w-5" />
                 </Button>
                 
-                {showLangMenu && (
-                  <div className="absolute right-0 mt-2 glass rounded-lg overflow-hidden shadow-lg w-28">
+                {(showLangMenu || dropdownState === 'closing') && (
+                  <div className={`absolute right-0 mt-2 glass rounded-lg overflow-hidden shadow-lg w-28 lang-dropdown-transition ${
+                    dropdownState === 'open' ? 'lang-dropdown-open' : 'lang-dropdown-closed'
+                  }`}>
                     {Object.entries(languages).map(([key, lang]) => (
                       <button
                         key={key}
-                        onClick={() => {
-                          setLanguage(key)
-                          setShowLangMenu(false)
-                        }}
-                        className={`block w-full px-4 py-2 text-left hover:bg-white/20 transition-colors ${
+                        onClick={() => handleLanguageSelect(key)}
+                        className={`block w-full px-4 py-2 text-left hover:bg-white/20 lang-dropdown-item ${
                           language === key ? 'bg-white/10' : ''
                         }`}
                       >
@@ -159,7 +184,7 @@ function App() {
                     ))}
                   </div>
                 )}
-              </div>
+                </div>
 
               {/* Dark Mode Toggle */}
               <Button
