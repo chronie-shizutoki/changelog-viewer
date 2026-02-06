@@ -280,13 +280,6 @@ function App() {
             </div>
           )}
         </main>
-
-        {/* Footer */}
-        <footer className="glass border-t border-white/10 mt-12">
-          <div className="container mx-auto px-4 py-6 text-center text-foreground/60 text-sm">
-            <p>Changelog Viewer • 2025</p>
-          </div>
-        </footer>
       </div>
 
       <style>{`
