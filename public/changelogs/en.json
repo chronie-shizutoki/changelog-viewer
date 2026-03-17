@@ -1,5 +1,10 @@
 [
   {
+    "version": "0.3.7",
+    "date": "2026-03-17",
+    "content": "## Optimized Simplified Chinese Expression \n\n - Used standard universal simplified Chinese instead of localized expressions \n\n ## Made some components look better\n\n - Fixed some component looks to make u happier"
+  },
+  {
     "version": "0.3.6",
     "date": "2026-01-15",
     "content": "## Made some components look better\n\n - Fixed some component looks to make u happier"
