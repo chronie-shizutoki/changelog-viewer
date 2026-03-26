@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Moon, Sun, Globe } from 'lucide-react'
+import { Moon, Sun, Monitor, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import { marked } from 'marked'
 import './App.css'
@@ -14,82 +14,94 @@ const languages = {
 
 const uiTexts = {
   "en": {
-    "title": 'New Stuff! 🎉',
+    "title": '🎉New Stuff!',
     "subtitle": 'See all the cool things we added for u!',
     "loading": 'Loading happi updates... 🐾',
     "error": 'Oops! Cant load the news 😿',
-    "version": 'Versin',
-    "darkMode": 'Dark mode go nyoom 🌙',
+    "themeSystem": 'System',
+    "themeLight": 'Light',
+    "themeDark": 'Dark',
     "language": 'Speak my language! 🌍'
   },
   "ja": {
-    "title": 'お知らせにゃん！🎉',
+    "title": '🎉お知らせにゃん！',
     "subtitle": '新しい機能と改善点をご紹介しますにゃ',
     "loading": '更新をチェック中... 🐾',
     "error": 'お知らせの読み込みに失敗しました 😿',
-    "version": 'バージョン',
-    "darkMode": 'ダークモードで遊ぼう 🌙',
+    "themeSystem": '自動',
+    "themeLight": 'ライト',
+    "themeDark": 'ダーク',
     "language": '言葉を変える 🌍'
   },
   "zh": {
-    "title": '新鲜事速递！🎉',
+    "title": '🎉新鲜事速递！',
     "subtitle": '来看看我们又准备了什么小惊喜~',
     "loading": '正在检查新礼物... 🐾',
     "error": '哎呀，消息迷路了 😿',
-    "version": '版本',
-    "darkMode": '夜间模式开关 🌙', 
+    "themeSystem": '系统', 
+    "themeLight": '浅色',
+    "themeDark": '深色',
     "language": '切换语言 🌍'
   },
   "tw": {
-    "title": '新鮮事速遞！🎉',
+    "title": '🎉新鮮事速遞！',
     "subtitle": '來看看我們又準備了什麼小驚喜~',
     "loading": '正在檢查新禮物... 🐾',
     "error": '哎呀，訊息迷路了 😿',
-    "version": '版本',
-    "darkMode": '夜間模式開關 🌙',
+    "themeSystem": '系統',
+    "themeLight": '淺色',
+    "themeDark": '深色',
     "language": '切換語言 🌍'
   }
 }
 
 function App() {
-  // Initialize dark mode: Check session storage and browser preferences
-  const getInitialDarkMode = () => {
-    // First check if there is a user preference in session storage
-    const storedDarkMode = sessionStorage.getItem('darkMode');
-    if (storedDarkMode !== null) {
-      return storedDarkMode === 'true';
+  const getInitialThemeMode = () => {
+    const storedThemeMode = sessionStorage.getItem('themeMode');
+    if (storedThemeMode !== null) {
+      return storedThemeMode;
     }
-    // Otherwise check browser preference
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return 'system';
   };
 
-  // Initialize language: Check browser language settings
   const getInitialLanguage = () => {
-    // Get browser preferred language
-    const browserLang = navigator.language.split('-')[0]; // Get main language code (e.g. 'en-US' -> 'en')
-    // Check if the language is supported
+    const browserLang = navigator.language.split('-')[0];
     if (Object.keys(languages).includes(browserLang)) {
       return browserLang;
     }
-    // If not supported, use default language
     return 'en';
   };
 
-  const [darkMode, setDarkMode] = useState(getInitialDarkMode)
+  const [themeMode, setThemeMode] = useState(getInitialThemeMode)
   const [language, setLanguage] = useState(getInitialLanguage)
   const [changelogs, setChangelogs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showLangMenu, setShowLangMenu] = useState(false)
-  const [dropdownState, setDropdownState] = useState('closed') // 'open', 'closing', 'closed'
+  const [showThemeMenu, setShowThemeMenu] = useState(false)
+  const [dropdownState, setDropdownState] = useState('closed')
+  const [themeDropdownState, setThemeDropdownState] = useState('closed')
+  const [themeTransition, setThemeTransition] = useState({ isActive: false, mode: null })
 
   const text = uiTexts[language]
 
-  // Handle dropdown animation states
+  const themeOptions = [
+    { key: 'system', label: text.themeSystem, icon: Monitor },
+    { key: 'light', label: text.themeLight, icon: Sun },
+    { key: 'dark', label: text.themeDark, icon: Moon }
+  ]
+
+  const getCurrentThemeIcon = () => {
+    switch (themeMode) {
+      case 'light': return Sun;
+      case 'dark': return Moon;
+      default: return Monitor;
+    }
+  }
+
   const handleMenuToggle = () => {
     if (dropdownState === 'open' || dropdownState === 'closing') {
       setDropdownState('closing')
-      // Wait for close animation to complete before hiding
       setTimeout(() => {
         setShowLangMenu(false)
         setDropdownState('closed')
@@ -100,7 +112,19 @@ function App() {
     }
   }
 
-  // Handle language selection
+  const handleThemeMenuToggle = () => {
+    if (themeDropdownState === 'open' || themeDropdownState === 'closing') {
+      setThemeDropdownState('closing')
+      setTimeout(() => {
+        setShowThemeMenu(false)
+        setThemeDropdownState('closed')
+      }, 400)
+    } else {
+      setShowThemeMenu(true)
+      setThemeDropdownState('open')
+    }
+  }
+
   const handleLanguageSelect = (key) => {
     setLanguage(key)
     setDropdownState('closing')
@@ -110,7 +134,56 @@ function App() {
     }, 400)
   }
 
-  // Load changelogs from JSON file
+  const handleThemeSelect = (key) => {
+    if (key === themeMode) {
+      setTimeout(() => {
+        setThemeDropdownState('closing')
+        setTimeout(() => {
+          setShowThemeMenu(false)
+          setThemeDropdownState('closed')
+        }, 400)
+      }, 50)
+      return
+    }
+
+    const getCurrentActualTheme = () => {
+      if (themeMode === 'dark') return 'dark';
+      if (themeMode === 'light') return 'light';
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    const getNewActualTheme = () => {
+      if (key === 'dark') return 'dark';
+      if (key === 'light') return 'light';
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    const currentActualTheme = getCurrentActualTheme();
+    const newActualTheme = getNewActualTheme();
+
+    if (currentActualTheme !== newActualTheme) {
+      setThemeTransition({ isActive: true, mode: key })
+
+      setTimeout(() => {
+        setThemeMode(key)
+      }, 400)
+
+      setTimeout(() => {
+        setThemeTransition({ isActive: false, mode: null })
+      }, 800)
+    } else {
+      setThemeMode(key)
+    }
+
+    setTimeout(() => {
+      setThemeDropdownState('closing')
+      setTimeout(() => {
+        setShowThemeMenu(false)
+        setThemeDropdownState('closed')
+      }, 400)
+    }, 50)
+  }
+
   useEffect(() => {
     const loadChangelogs = async () => {
       try {
@@ -132,26 +205,39 @@ function App() {
     loadChangelogs()
   }, [language])
 
-  // Toggle dark mode and save to session storage
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    // Save dark mode preference to session storage
-    sessionStorage.setItem('darkMode', darkMode.toString());
-  }, [darkMode])
+    const applyTheme = () => {
+      let isDark = false;
+      if (themeMode === 'dark') {
+        isDark = true;
+      } else if (themeMode === 'system') {
+        isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      
+      if (isDark) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    };
 
-  // Close dropdown when clicking outside
+    applyTheme();
+    sessionStorage.setItem('themeMode', themeMode);
+
+    if (themeMode === 'system') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = () => applyTheme();
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, [themeMode])
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if dropdown is open
       if (showLangMenu || dropdownState === 'closing') {
         const langButton = event.target.closest('button[title="' + text.language + '"]');
         const langDropdown = event.target.closest('.lang-dropdown-transition');
         
-        // If click is outside both the button and the dropdown
         if (!langButton && !langDropdown) {
           setDropdownState('closing');
           setTimeout(() => {
@@ -160,29 +246,40 @@ function App() {
           }, 400);
         }
       }
+
+      if (showThemeMenu || themeDropdownState === 'closing') {
+        const themeButton = event.target.closest('.theme-toggle-btn');
+        const themeDropdown = event.target.closest('.lang-dropdown-transition');
+        
+        if (!themeButton && !themeDropdown) {
+          setThemeDropdownState('closing');
+          setTimeout(() => {
+            setShowThemeMenu(false);
+            setThemeDropdownState('closed');
+          }, 400);
+        }
+      }
     };
 
-    // Add event listener
     document.addEventListener('mousedown', handleClickOutside);
     
-    // Cleanup event listener on unmount
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showLangMenu, dropdownState, text.language])
+  }, [showLangMenu, dropdownState, showThemeMenu, themeDropdownState, text.language])
 
   return (
     <div className="min-h-screen gradient-bg">
       <div className="min-h-screen backdrop-blur-sm">
         {/* Header */}
         <header className="sticky top-0 z-50 glass border-b border-white/10">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground">{text.title}</h1>
+          <div className="container mx-auto px-4 py-2 flex items-center justify-center relative">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-foreground">{text.title}</h1>
               <p className="text-sm text-foreground/70">{text.subtitle}</p>
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 absolute right-4">
               {/* Language Selector */}
               <div className="relative">
                 <Button
@@ -214,20 +311,42 @@ function App() {
                 )}
                 </div>
 
-              {/* Dark Mode Toggle */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setDarkMode(!darkMode)}
-                className="glass hover:bg-white/20"
-                title={text.darkMode}
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleThemeMenuToggle}
+                  className="glass hover:bg-white/20 theme-toggle-btn"
+                  title={themeOptions.find(opt => opt.key === themeMode)?.label}
+                >
+                  {(() => {
+                    const Icon = getCurrentThemeIcon();
+                    return <Icon className="h-5 w-5" />;
+                  })()}
+                </Button>
+                
+                {(showThemeMenu || themeDropdownState === 'closing') && (
+                  <div className={`absolute right-0 mt-2 glass rounded-lg overflow-hidden shadow-lg w-28 lang-dropdown-transition ${
+                    themeDropdownState === 'open' ? 'lang-dropdown-open' : 'lang-dropdown-closed'
+                  }`}>
+                    {themeOptions.map((option) => {
+                      const Icon = option.icon;
+                      return (
+                        <button
+                          key={option.key}
+                          onClick={() => handleThemeSelect(option.key)}
+                          className={`flex items-center gap-2 w-full px-4 py-2 text-left hover:bg-white/20 lang-dropdown-item ${
+                            themeMode === option.key ? 'bg-white/10' : ''
+                          }`}
+                        >
+                          <Icon className="h-4 w-4" />
+                          <span>{option.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
-              </Button>
+              </div>
             </div>
           </div>
         </header>
@@ -263,10 +382,10 @@ function App() {
                   <div className="flex items-center justify-between mb-4 pb-4 border-b border-white/10">
                     <div className="flex items-center gap-3">
                       <span className="inline-block px-3 py-1 bg-primary/20 text-primary rounded-full text-sm font-semibold">
-                        {text.version} {log.version}
+                        {log.version}
                       </span>
-                      <span className="text-foreground/60 text-sm">{log.date}</span>
                     </div>
+                    <span className="text-foreground/60 text-sm">{log.date}</span>
                   </div>
                   
                   <div
@@ -282,6 +401,15 @@ function App() {
         </main>
       </div>
 
+      {/* Theme transition overlay */}
+      {themeTransition.isActive && (
+        <div 
+          className={`fixed inset-0 z-[9999] pointer-events-none theme-transition-overlay ${
+            themeTransition.mode === 'dark' ? 'theme-to-dark' : 'theme-to-light'
+          }`}
+        />
+      )}
+
       <style>{`
         @keyframes fadeInUp {
           from {
@@ -291,6 +419,44 @@ function App() {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        .theme-transition-overlay {
+          background: #000;
+          opacity: 0;
+          clip-path: circle(0% at calc(100% - 3rem) 2rem);
+          transition: clip-path 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+
+        .theme-transition-overlay.theme-to-dark {
+          animation: themeExpand 0.8s ease-in-out forwards;
+        }
+
+        .theme-transition-overlay.theme-to-light {
+          animation: themeExpand 0.8s ease-in-out forwards;
+        }
+
+        @keyframes themeExpand {
+          0% {
+            clip-path: circle(0% at calc(100% - 3rem) 2rem);
+            opacity: 0;
+          }
+          30% {
+            clip-path: circle(10% at calc(100% - 3rem) 2rem);
+            opacity: 0.8;
+          }
+          50% {
+            clip-path: circle(150% at calc(100% - 3rem) 2rem);
+            opacity: 1;
+          }
+          70% {
+            clip-path: circle(150% at calc(100% - 3rem) 2rem);
+            opacity: 0.8;
+          }
+          100% {
+            clip-path: circle(0% at calc(100% - 3rem) 2rem);
+            opacity: 0;
           }
         }
       `}</style>
