@@ -21,7 +21,13 @@ const uiTexts = {
     "themeSystem": 'System',
     "themeLight": 'Light',
     "themeDark": 'Dark',
-    "language": 'Speak my language! 🌍'
+    "language": 'Speak my language! 🌍',
+    "timeToday": 'Today',
+    "timeYesterday": 'Yesterday',
+    "timeDaysAgo": '{days}d ago',
+    "timeWeeksAgo": '{weeks}w ago',
+    "timeMonthsAgo": '{months}mo ago',
+    "timeYearsAgo": '{years}y ago'
   },
   "ja": {
     "title": '🎉お知らせにゃん！',
@@ -31,7 +37,13 @@ const uiTexts = {
     "themeSystem": '自動',
     "themeLight": 'ライト',
     "themeDark": 'ダーク',
-    "language": '言葉を変える 🌍'
+    "language": '言葉を変える 🌍',
+    "timeToday": '今日',
+    "timeYesterday": '昨日',
+    "timeDaysAgo": '{days}日前',
+    "timeWeeksAgo": '{weeks}週間前',
+    "timeMonthsAgo": '{months}か月前',
+    "timeYearsAgo": '{years}年前'
   },
   "zh": {
     "title": '🎉新鲜事速递！',
@@ -41,7 +53,13 @@ const uiTexts = {
     "themeSystem": '系统', 
     "themeLight": '浅色',
     "themeDark": '深色',
-    "language": '切换语言 🌍'
+    "language": '切换语言 🌍',
+    "timeToday": '今天',
+    "timeYesterday": '昨天',
+    "timeDaysAgo": '{days}天前',
+    "timeWeeksAgo": '{weeks}周前',
+    "timeMonthsAgo": '{months}月前',
+    "timeYearsAgo": '{years}年前'
   },
   "tw": {
     "title": '🎉新鮮事速遞！',
@@ -51,7 +69,13 @@ const uiTexts = {
     "themeSystem": '系統',
     "themeLight": '淺色',
     "themeDark": '深色',
-    "language": '切換語言 🌍'
+    "language": '切換語言 🌍',
+    "timeToday": '今天',
+    "timeYesterday": '昨天',
+    "timeDaysAgo": '{days}天前',
+    "timeWeeksAgo": '{weeks}週前',
+    "timeMonthsAgo": '{months}月前',
+    "timeYearsAgo": '{years}年前'
   }
 }
 
@@ -96,6 +120,49 @@ function App() {
       case 'light': return Sun;
       case 'dark': return Moon;
       default: return Monitor;
+    }
+  }
+
+  const formatRelativeTime = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = now - date;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      return text.timeToday;
+    } else if (diffDays === 1) {
+      return text.timeYesterday;
+    } else if (diffDays >= 2 && diffDays <= 6) {
+      return text.timeDaysAgo.replace('{days}', diffDays);
+    } else if (diffDays >= 7 && diffDays <= 27) {
+      const weeks = Math.floor(diffDays / 7);
+      return text.timeWeeksAgo.replace('{weeks}', weeks);
+    }
+
+    const yearDiff = now.getFullYear() - date.getFullYear();
+    const monthDiff = now.getMonth() - date.getMonth();
+    const totalMonths = yearDiff * 12 + monthDiff;
+
+    const targetDay = date.getDate();
+    const currentDay = now.getDate();
+
+    let months = totalMonths;
+    if (currentDay < targetDay) {
+      const dayDifference = targetDay - currentDay;
+      if (dayDifference > 5) {
+        months = totalMonths - 1;
+      }
+    }
+
+    if (months < 1) {
+      const weeks = Math.floor(diffDays / 7);
+      return text.timeWeeksAgo.replace('{weeks}', weeks);
+    } else if (months < 12) {
+      return text.timeMonthsAgo.replace('{months}', months);
+    } else {
+      const years = Math.floor(months / 12);
+      return text.timeYearsAgo.replace('{years}', years);
     }
   }
 
@@ -385,7 +452,7 @@ function App() {
                         {log.version}
                       </span>
                     </div>
-                    <span className="text-foreground/60 text-sm">{log.date}</span>
+                    <span className="text-foreground/60 text-sm">{formatRelativeTime(log.date)}</span>
                   </div>
                   
                   <div
